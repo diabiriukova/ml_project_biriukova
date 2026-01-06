@@ -4,7 +4,6 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.utils import resample
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.decomposition import PCA
@@ -24,11 +23,11 @@ y = secondary_mushroom.data.targets
 X.drop(columns=['gill-spacing','stem-surface','stem-root', 'spore-print-color', 'veil-type', 'veil-color'],axis=1,inplace=True)
 
 
-label_encoder = LabelEncoder()
+lab_enc = LabelEncoder()
 
 #Impute where there are some null values
-X['cap-surface-encoded'] = label_encoder.fit_transform(X['cap-surface'])
-cap_surface_data = dict(zip(label_encoder.classes_, range(len(label_encoder.classes_))))
+X['cap-surface-encoded'] = lab_enc.fit_transform(X['cap-surface'])
+cap_surface_data = dict(zip(lab_enc.classes_, range(len(lab_enc.classes_))))
 X['cap-surface-encoded'].replace({11: np.nan},inplace=True)
 X['cap-surface-imputed'] = impute(X['cap-surface-encoded'])
 cap_surface_data = {value: key for key, value in cap_surface_data.items()}
@@ -36,8 +35,8 @@ X['cap-surface-imputed'] = X['cap-surface-imputed'].map(cap_surface_data)
 
 
 
-X['gill-attachment-encoded'] = label_encoder.fit_transform(X['gill-attachment'])
-gill_attachment_data = dict(zip(label_encoder.classes_, range(len(label_encoder.classes_))))
+X['gill-attachment-encoded'] = lab_enc.fit_transform(X['gill-attachment'])
+gill_attachment_data = dict(zip(lab_enc.classes_, range(len(lab_enc.classes_))))
 X['gill-attachment-encoded'].replace({7:np.nan},inplace=True)
 X['gill-attachment-imputed'] = impute(X['gill-attachment-encoded'])
 gill_attachment_data = {value: key for key, value in gill_attachment_data.items()}
@@ -45,8 +44,8 @@ X['gill-attachment-imputed'] = X['gill-attachment-imputed'].map(gill_attachment_
 
 
 
-X['ring-type-encoded'] = label_encoder.fit_transform(X['ring-type'])
-ring_type_data = dict(zip(label_encoder.classes_, range(len(label_encoder.classes_))))
+X['ring-type-encoded'] = lab_enc.fit_transform(X['ring-type'])
+ring_type_data = dict(zip(lab_enc.classes_, range(len(lab_enc.classes_))))
 X['ring-type-encoded'].replace({8:np.nan},inplace=True)
 X['ring-type-imputed'] = impute(X['ring-type-encoded'])
 ring_type_data = {value: key for key, value in ring_type_data.items()}
@@ -59,8 +58,8 @@ X_imputed = X.drop(columns=['ring-type', 'gill-attachment', 'cap-surface' , 'cap
 
 
 #LABEL ENCODING + One-Hot
-y = label_encoder.fit_transform(y)
-class_encoded_data = dict(zip(label_encoder.classes_, range(len(label_encoder.classes_))))
+y = lab_enc.fit_transform(y)
+class_encoded_data = dict(zip(lab_enc.classes_, range(len(lab_enc.classes_))))
 
 X_dummies = pd.get_dummies(X_imputed,dtype=int,drop_first=True)
 #print(X_dummies)

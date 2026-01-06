@@ -2,7 +2,6 @@ import joblib
 import streamlit as st
 import pandas as pd
 
-# Load trained Random Forest
 model = joblib.load("model_rf.pkl")
 dummy_columns = joblib.load("dummy_columns.pkl")
 
