@@ -29,7 +29,7 @@ st.header("Dataset and Methods")
 st.markdown("""
 ### Dataset
 - Wagner D, Heider D, Hattab G. Secondary Mushroom [dataset]. 2021. UCI Machine Learning Repository. Available from: https://doi.org/10.24432/C5FP5Q.
-- Categorical mushroom attributes
+- Categorical and numerical mushroom attributes
 - Target attribute: edible or poisonous
 - Dataset of 61068 labeled instances
 - Missing values handled via **imputation** 
@@ -54,7 +54,7 @@ It is assumed that the amount of instances can be theoretically labeled by a hum
 st.header("Results")
 
 st.markdown("""
-Across all experiments, **semi-supervised methods consistently underperformed
+Across all experiments, semi-supervised methods consistently underperformed
 compared to supervised learning trained on the same number of labeled samples.
 
 Model performance was measured using test accuracy.
@@ -87,7 +87,7 @@ and strongly depends on dataset structure.
 st.header("Interactive Prediction Demo")
 
 st.markdown("""
-This demo allows you to test the **final supervised Random Forest model**. It was trained on labeeled dataset of 42746 instances and tested on 18321 instances.
+This demo allows you to test the **final supervised Random Forest model**. It was trained on labeled dataset of 42746 instances and tested on 18321 instances.
 The model produces accuracy of 99%.
 """)
 
