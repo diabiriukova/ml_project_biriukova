@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.utils import resample
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.decomposition import PCA
 from sklearn.semi_supervised import LabelSpreading
 
@@ -144,9 +144,35 @@ y_pred_train_rf = rf.predict(X_train_rf)
 y_pred_test_rf = rf.predict(X_test)
 accuracy_train = accuracy_score(y_train_rf, y_pred_train_rf)
 accuracy_test = accuracy_score(y_test, y_pred_test_rf)
-print('Random Forest with Label Propagation :')
+# Precision, Recall, F1 (poisonous class as positive = 1)
+precision_p = precision_score(y_test, y_pred_test_rf, pos_label=1)
+recall_p = recall_score(y_test, y_pred_test_rf, pos_label=1)
+f1_p = f1_score(y_test, y_pred_test_rf, pos_label=1)
+precision_e = precision_score(y_test, y_pred_test_rf, pos_label=0)
+recall_e = recall_score(y_test, y_pred_test_rf, pos_label=0)
+f1_e = f1_score(y_test, y_pred_test_rf, pos_label=0)
+
+print('Random Forest with Label Propagation:')
 print('Train accuracy:')
 print(f'{accuracy_train}\n')
 
 print('Test accuracy:')
 print(f'{accuracy_test}\n')
+
+print('Precision (poisonous):')
+print(f'{precision_p}\n')
+
+print('Recall (poisonous):')
+print(f'{recall_p}\n')
+
+print('F1-score (poisonous):')
+print(f'{f1_p}\n')
+
+print('Precision (edible):')
+print(f'{precision_e}\n')
+
+print('Recall (edible):')
+print(f'{recall_e}\n')
+
+print('F1-score (edible):')
+print(f'{f1_e}\n')

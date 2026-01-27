@@ -5,7 +5,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.utils import resample
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
 
 def impute(column):
     missing = column.isnull()
@@ -82,11 +83,37 @@ print(f'{accuracy_train}\n')
 print('Test accuracy:')
 print(f'{accuracy_test}\n')
 
+# Precision, Recall, F1 (poisonous class as positive = 1)
+precision_p = precision_score(y_test, y_pred_test, pos_label=1)
+recall_p = recall_score(y_test, y_pred_test, pos_label=1)
+f1_p = f1_score(y_test, y_pred_test, pos_label=1)
+precision_e = precision_score(y_test, y_pred_test, pos_label=0)
+recall_e = recall_score(y_test, y_pred_test, pos_label=0)
+f1_e = f1_score(y_test, y_pred_test, pos_label=0)
+
+print('Precision (poisonous):')
+print(f'{precision_p}\n')
+
+print('Recall (poisonous):')
+print(f'{recall_p}\n')
+
+print('F1-score (poisonous):')
+print(f'{f1_p}\n')
+
+print('Precision (edible):')
+print(f'{precision_e}\n')
+
+print('Recall (edible):')
+print(f'{recall_e}\n')
+
+print('F1-score (edible):')
+print(f'{f1_e}\n')
+
 
 #Take only 100 labeled instances
 np.random.seed(42)
 
-n_labeled = 100
+n_labeled = 200
 indices = np.random.permutation(len(X_train))
 
 labeled_idx = indices[:n_labeled]
@@ -118,6 +145,31 @@ print('Test accuracy:')
 accuracy_test = accuracy_score(y_test, y_pred_test2)
 print(f'{accuracy_test}\n')
 
+# Precision, Recall, F1 (poisonous class as positive = 1)
+precision_p_2 = precision_score(y_test, y_pred_test2, pos_label=1)
+recall_p_2 = recall_score(y_test, y_pred_test2, pos_label=1)
+f1_p_2 = f1_score(y_test, y_pred_test2, pos_label=1)
+precision_e_2 = precision_score(y_test, y_pred_test2, pos_label=0)
+recall_e_2 = recall_score(y_test, y_pred_test2, pos_label=0)
+f1_e_2 = f1_score(y_test, y_pred_test2, pos_label=0)
+
+print('Precision (poisonous):')
+print(f'{precision_p_2}\n')
+
+print('Recall (poisonous):')
+print(f'{recall_p_2}\n')
+
+print('F1-score (poisonous):')
+print(f'{f1_p_2}\n')
+
+print('Precision (edible):')
+print(f'{precision_e_2}\n')
+
+print('Recall (edible):')
+print(f'{recall_e_2}\n')
+
+print('F1-score (edible):')
+print(f'{f1_e_2}\n')
 
 
 #PSEUDO-LABELING
@@ -129,6 +181,7 @@ pseudo_labels = []
 
 new_added = True
 
+print('\nIterative pseudo-labeling with Logistic Regression and 100 labeled instances')
 while new_added:
     model3 = LogisticRegression()
     model3.fit(X_labeled, y_labeled)
@@ -137,6 +190,26 @@ while new_added:
 
     accuracy_train = accuracy_score(y_labeled, y_pred_train3)
     accuracy_test = accuracy_score(y_test, y_pred_test3)
+
+    # Classification metrics (test set)
+    precision_p_2 = precision_score(y_test, y_pred_test3, pos_label=1)
+    recall_p_2 = recall_score(y_test, y_pred_test3, pos_label=1)
+    f1_p_2 = f1_score(y_test, y_pred_test3, pos_label=1)
+    precision_e_2 = precision_score(y_test, y_pred_test3, pos_label=0)
+    recall_e_2 = recall_score(y_test, y_pred_test3, pos_label=0)
+    f1_e_2 = f1_score(y_test, y_pred_test3, pos_label=0)
+
+    # Print metrics per iteration
+    print(f'Iteration {iteration}')
+    print(f'Train accuracy: {accuracy_train:.4f}')
+    print(f'Test accuracy:  {accuracy_test:.4f}')
+    print(f'Precision(p):      {precision_p_2:.4f}')
+    print(f'Recall(p):         {recall_p_2:.4f}')
+    print(f'F1-score(p):       {f1_p_2:.4f}')
+    print(f'Precision(e):      {precision_e_2:.4f}')
+    print(f'Recall(e):         {recall_e_2:.4f}')
+    print(f'F1-score(e):       {f1_e_2:.4f}')
+    print('-' * 40)
 
     training_accuracy.append(accuracy_train)
     testing_accuracy.append(accuracy_test)
