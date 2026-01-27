@@ -20,8 +20,9 @@ Technologies used:
 
 How to run the project:
 -
-1. Technologies mentioned before have to be installed
-2. Run the app using `streamlit run app.py`.
+1. Technologies mentioned before have to be installed.
+2. Unzip the file `model_rf.zip`. There is a saved trained Random Forest model `model_rf.pkl` in the archive.
+3. Run the app using `streamlit run app.py`.
 
 
 Other files:
@@ -38,7 +39,7 @@ Script for training and evaluating the Random Forest model.
 
 Script for training and evaluating the Random Forest model with Label Propagation.
 
-- model_rf.pkl
+- model_rf.zip with model_rf.pkl
 
 Saved trained Random Forest model.
 
