@@ -57,12 +57,12 @@ st.markdown("""
 Across all experiments, semi-supervised methods consistently underperformed
 compared to supervised learning trained on the same number of labeled samples.
 
-Model performance was measured using test accuracy.
+Model performance was measured using test accuracy, precision, recall and F1 score.
 """)
 
 data = {
-    "Model": ["Logistic Regression on labeled  42746 instances ", "Logistic Regression on labeled 100 instances", "Iterative pseudo-labeling with Logistic Regression and 100 labeled instances(56 iterations)","Random Forest on labeled  42746 instances","Random Forest on labeled 100 instances", "Iterative pseudo-labeling with Random Forest and 100 labeled instances(0 iterations)", "Random Forest on labeled 200 instances", "Iterative pseudo-labeling with Random Forest and 200 labeled instances(27 iterations)","Label Propagation combined with Random Forest + PCA and 100 labeled instances","Label Propagation combined with Random Forest + PCA and 200 labeled instances","Label Propagation combined with Random Forest + PCA and 500 labeled instances","Label Propagation combined with Random Forest + PCA and 1000 labeled instances"],
-    "Test Accuracy (%)": [76.9, 64.4,61.7, 99.9, 67.3, 67.3, 72.7,67.3, 52.3, 50.1,52.2,55.2]
+    "Model": ["Logistic Regression on labeled  42746 instances ", "Logistic Regression on labeled 100 instances", "Iterative pseudo-labeling with Logistic Regression and 100 labeled instances(56 iterations)","Random Forest on labeled  42746 instances","Random Forest on labeled 100 instances", "Iterative pseudo-labeling with Random Forest and 100 labeled instances(0 iterations)", "Random Forest on labeled 200 instances", "Iterative pseudo-labeling with Random Forest and 200 labeled instances(30 iterations)","Label Propagation combined with Random Forest + PCA and 100 labeled instances","Label Propagation combined with Random Forest + PCA and 200 labeled instances","Label Propagation combined with Random Forest + PCA and 500 labeled instances","Label Propagation combined with Random Forest + PCA and 1000 labeled instances"],
+    "Test Accuracy (%)": [76.9, 64.4,61.7, 99.9, 67.3, 67.3, 72.7,61.5, 52.3, 50.1,52.2,55.2]
 }
 
 df = pd.DataFrame(data)
